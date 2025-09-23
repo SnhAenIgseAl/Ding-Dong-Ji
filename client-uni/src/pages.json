@@ -1,0 +1,102 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+		  "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+		}
+	},
+	"pages": [
+		
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/comment/comment",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/menu/menu",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/menu/menuDetail",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/menu/submit",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/order/list",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/order/detail",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/user/register",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/user/pages/updateUser",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/user/pages/updateAvatar",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/user/pages/forgotPassword",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/discount/discount",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/address/address",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "叮咚鸡",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

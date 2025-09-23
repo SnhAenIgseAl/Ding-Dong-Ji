@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.page {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+.border-round {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}

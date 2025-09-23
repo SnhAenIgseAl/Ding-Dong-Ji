@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"jsx": "preserve",
+		"strict": true,
+		"sourceMap": true,
+		"useDefineForClassFields": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"noImplicitAny": false,
+		// "isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"baseUrl": "./",
+		"paths": {
+			"@/*": [
+				"./src/*"
+			]
+		},
+		"types": [
+			"@dcloudio/types",
+			"miniprogram-api-typings",
+			"@types/node",
+			"wot-design-uni/global"
+		]
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.d.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue"
+	]
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vips",
+  "info": {
+    "singularName": "vip",
+    "pluralName": "vips",
+    "displayName": "VIP"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "VIP_level": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "vip"
+    },
+    "deadline": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}

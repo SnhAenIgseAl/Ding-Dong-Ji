@@ -1,0 +1,14 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customs",
+  "info": {
+    "singularName": "custom",
+    "pluralName": "customs",
+    "displayName": "Custom"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {}
+}

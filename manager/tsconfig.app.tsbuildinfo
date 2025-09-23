@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/shims-vue.d.ts","./src/vite-env.d.ts","./src/router/index.ts","./src/store/user.ts","./src/types/index.d.ts","./src/utils/detail.ts","./src/utils/userequest.ts","./src/app.vue","./src/components/helloworld.vue","./src/views/detail/detail.vue","./src/views/detail/index.vue","./src/views/index/index.vue"],"version":"5.6.3"}

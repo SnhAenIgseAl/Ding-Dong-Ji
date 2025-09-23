@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menu_flavors",
+  "info": {
+    "singularName": "menu-flavor",
+    "pluralName": "menu-flavors",
+    "displayName": "MenuFlavor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "flavor_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10,
+      "required": true,
+      "unique": true
+    },
+    "flavor_list": {
+      "type": "json",
+      "required": true
+    },
+    "flavor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10,
+      "required": true
+    },
+    "menus": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::menu.menu",
+      "mappedBy": "menu_flavors"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "discounts",
+  "info": {
+    "singularName": "discount",
+    "pluralName": "discounts",
+    "displayName": "Discount"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "discount_name": {
+      "type": "string",
+      "required": true
+    },
+    "reach": {
+      "type": "decimal",
+      "required": true
+    },
+    "subtract": {
+      "type": "decimal",
+      "required": true
+    },
+    "deadline": {
+      "type": "datetime",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "discounts"
+    },
+    "order_list": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order-list.order-list",
+      "inversedBy": "discount"
+    },
+    "is_used": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  }
+}

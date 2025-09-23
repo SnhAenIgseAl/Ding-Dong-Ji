@@ -1,0 +1,9 @@
+client-uni/node_modules
+client-uni/dist
+
+manager/node_modules
+manager/dist
+
+server/node_modules
+server/public
+server/dist

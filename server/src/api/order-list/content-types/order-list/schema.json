@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_lists",
+  "info": {
+    "singularName": "order-list",
+    "pluralName": "order-lists",
+    "displayName": "OrderList"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order_id": {
+      "type": "string",
+      "required": true
+    },
+    "store": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::store.store",
+      "inversedBy": "order_lists"
+    },
+    "order_mode": {
+      "type": "enumeration",
+      "required": true,
+      "default": "dine_in",
+      "enum": [
+        "outside",
+        "takeout",
+        "dine_in"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "order_lists"
+    },
+    "order_list": {
+      "type": "json",
+      "required": true
+    },
+    "order_price": {
+      "type": "decimal",
+      "required": true,
+      "default": 0
+    },
+    "order_status": {
+      "type": "enumeration",
+      "enum": [
+        "production",
+        "delivering",
+        "pick_up",
+        "finished",
+        "canceled"
+      ]
+    },
+    "discount": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::discount.discount",
+      "mappedBy": "order_list"
+    },
+    "address": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::address.address"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comment_likes",
+  "info": {
+    "singularName": "comment-like",
+    "pluralName": "comment-likes",
+    "displayName": "CommentLike"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "comment": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::comment.comment",
+      "inversedBy": "comment_likes"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "comment_likes"
+    }
+  }
+}
