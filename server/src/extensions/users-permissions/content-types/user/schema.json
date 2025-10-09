@@ -110,6 +110,10 @@
       "relation": "oneToOne",
       "target": "api::store.store",
       "inversedBy": "user"
+    },
+    "is_admin": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

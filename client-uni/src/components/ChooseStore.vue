@@ -15,14 +15,16 @@
             v-else
             title="尚未选择餐厅"
         >
-            <wd-button type="icon" icon="translate-bold" @click="showStoreList = true"></wd-button>
+            <template #suffix>
+                <wd-button type="icon" icon="translate-bold" @click="showStoreList = true"></wd-button>
+            </template>
         </ShowLayout>
     </view>
     <wd-action-sheet 
         v-model="showStoreList" 
         title="选择一家餐厅" 
     >
-        <view>
+        <view class="store-list">
             <wd-radio-group 
                 v-model="choose" 
                 cell
@@ -33,9 +35,19 @@
                     :value="storeIndex"
                     :disabled="!storeItem.is_operation"
                 >
-                    {{ storeItem.store_name }} {{ storeItem.store_address }} · 
-                    <span v-if="storeItem.is_operation">营业中</span>
-                    <span v-else>已打烊</span>
+                    <ShowLayout>
+                        <template #title>
+                            {{ storeItem.store_name }}
+                        </template>
+                        <template #content>
+                            {{ storeItem.store_address }} | 
+                            {{ getDistance(latitude, longitude, storeItem.latitude, storeItem.longitude) }}m
+                        </template>
+                        <template #suffix>
+                            <span v-if="storeItem.is_operation">营业中</span>
+                            <span v-else>已打烊</span>
+                        </template>
+                    </ShowLayout>
                 </wd-radio>
             </wd-radio-group>
         </view>
@@ -54,6 +66,10 @@ import ShowLayout from './ShowLayout.vue';
 import { useShoppingStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { getStoreList } from '@/api/index'
+import { useToast } from 'wot-design-uni'
+import { getDistance } from '@/utils/common'
+
+const toast = useToast()
 
 const {
     storeInfo,
@@ -78,6 +94,21 @@ watch(showStoreList, (newVal, oldVal) => {
     }
 })
 
+const latitude = ref(0)
+const longitude = ref(0)
+
+uni.getLocation({
+    success: (res) => {
+        console.log(res);
+        latitude.value = res.latitude
+        longitude.value = res.longitude
+    },
+    fail: (fail) => {
+        toast.error('用户拒绝获取位置信息')
+    }
+})
+
+
 const confirm = () => {
     // show.value = false
     showStoreList.value = false
@@ -91,5 +122,11 @@ const confirm = () => {
 .store-info {
     padding: 32rpx;
     box-sizing: border-box;
+}
+
+.store-list {
+    height: auto;
+    max-height: 960rpx;
+    overflow-y: scroll;
 }
 </style>

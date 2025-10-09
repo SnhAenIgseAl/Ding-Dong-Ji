@@ -11,11 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "store_id": {
-      "type": "uid",
-      "targetField": "store_name",
-      "required": true
-    },
     "store_name": {
       "type": "string",
       "minLength": 1,
@@ -35,6 +30,12 @@
     "store_closing": {
       "type": "time",
       "required": true
+    },
+    "longitude": {
+      "type": "decimal"
+    },
+    "latitude": {
+      "type": "decimal"
     },
     "order_lists": {
       "type": "relation",

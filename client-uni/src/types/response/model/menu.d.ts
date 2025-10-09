@@ -47,4 +47,6 @@ declare interface Store {
     updatedAt:     ISODateString;
     publishedAt:   ISODateString;
     is_operation:  boolean;
+    latitude:      number;
+    longitude:     number;
 }

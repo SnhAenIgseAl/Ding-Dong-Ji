@@ -81,6 +81,11 @@ const menuList = [
 		url: '/comment',
 	},
 	{
+		name: '分店管理',
+		value: 'store',
+		url: '/store',
+	},
+	{
 		name: '个人中心',
 		value: 'user',
 		url: '/user'

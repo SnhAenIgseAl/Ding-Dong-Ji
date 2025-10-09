@@ -27,7 +27,7 @@ export default (config, { strapi }: { strapi: Core.Strapi }) => {
 					...ctx.query,
 					filters: {
 						store: {
-							store_id: store.store_id,
+							id: store.id,
 						},
 						...ctx.query.filters
 					},

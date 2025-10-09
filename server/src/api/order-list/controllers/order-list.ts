@@ -73,7 +73,7 @@ export default factories.createCoreController('api::order-list.order-list', ({ s
 
         // 订单编号 = 分店编号 + 当日订单号（三位数，不足补0）
         ORDER_ID[store] = ORDER_ID[store] || 0
-        const orderId = storeInfo.store_id + String(++ORDER_ID[store]).padStart(3, '0')
+        const orderId = storeInfo.id + String(++ORDER_ID[store]).padStart(3, '0')
 
         ctx.request.body.data = {
             ...data,

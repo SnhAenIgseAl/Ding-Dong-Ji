@@ -66,9 +66,23 @@ export default factories.createCoreController('api::custom.custom', ({ strapi })
      * @param ctx 
      */
     async getTotalRecent(ctx) {
+        const user = ctx.state.user
+        const storeInfo = await strapi.documents('api::store.store').findFirst({
+            filters: {
+                user: {
+                    documentId: user.documentId
+                }
+            }
+        })
+
         const recentData = await strapi.documents('api::order-list.order-list').findMany({
             limit: 10000,
-            start: 0
+            start: 0,
+            filters: {
+                store: {
+                    documentId: storeInfo.documentId
+                }
+            }
         })
 
         let price: number = 0
@@ -107,8 +121,23 @@ export default factories.createCoreController('api::custom.custom', ({ strapi })
      * @param ctx 
      */
     async getTotalToday(ctx) {
+        const user = ctx.state.user
+        const storeInfo = await strapi.documents('api::store.store').findFirst({
+            filters: {
+                user: {
+                    documentId: user.documentId
+                }
+            }
+        })
+
+        console.log(storeInfo);
+        
+
         const todayData = await strapi.documents('api::order-list.order-list').findMany({
             filters: {
+                store: {
+                    documentId: storeInfo.documentId
+                },
                 createdAt: {
                     $between: [
                         new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),

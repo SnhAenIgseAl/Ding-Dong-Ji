@@ -39,7 +39,8 @@ export const getUserInfo = () => {
         useFetch('/users/me', {
             method: 'GET'
         }, [
-            { 'populate': 'store' }
+            { 'populate': 'store' },
+            { 'populate': 'role' }
         ]).then(res => {
             resolve(res as User)
         })
@@ -53,7 +54,7 @@ export const updateUser = async ({
 }: {
     username?: string,
     avatar?: string,
-    }) => {
+}) => {
     const userStore = await getUserStore()
     return new Promise <
         ResponseData <

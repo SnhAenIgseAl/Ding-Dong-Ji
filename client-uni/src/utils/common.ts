@@ -55,3 +55,30 @@ export const sleep = (time: number) => {
         }, time)
     })
 }
+
+/**
+ * 计算两个经纬度之间的距离
+ * @param lat1 纬度1
+ * @param lng1 经度1
+ * @param lat2 纬度2
+ * @param lng2 经度2
+ */
+export const getDistance = (lat1: number, lng1: number, lat2: number, lng2: number, toFixed: number = 0) => {
+    const FINAL = 6378137.0
+    const flat = calcDegree(lat1)
+    const flng = calcDegree(lng1)
+    const tlat = calcDegree(lat2) 
+    const tlng = calcDegree(lng2)
+
+    let result = Math.sin(flat) * Math.sin(tlat) 
+    result += Math.cos(flat) * Math.cos(tlat) * Math.cos(flng - tlng)
+    return (Math.acos(result) * FINAL).toFixed(toFixed);
+}
+
+/** 
+ * 求某个经纬度的值的角度值 
+ * @param {Object} d 
+ */  
+export const calcDegree = (d: number) => {  
+    return d * Math.PI / 180.0 ;  
+}  

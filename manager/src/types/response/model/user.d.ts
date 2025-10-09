@@ -12,6 +12,8 @@ declare interface UserInfo {
     vip:         VideoPixelFormat;
     avatar:      string;
     store:       Store;
+    role:        any;
+    is_admin:   boolean;
 }
 
 declare interface VIP {

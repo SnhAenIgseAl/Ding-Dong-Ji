@@ -17,21 +17,17 @@ interface HttpError {
 	[key: number]: string
 }
 
-// http错误码
-const httpErrCode: HttpError = {
-	400: '请求错误',
-	401: '请登录再操作',
-	403: '拒绝访问',
-	404: '请求地址不存在',
-	500: '服务器错误'
-}
-
 export const request = async (
 	url: string,
 	config: RequestConfig
 ) => {
+	
 	const { isLogin, userToken } = storeToRefs(await getUserStore())
-	const [ ...params ] = config.params ?? []
+	const [...params] = config.params ?? []
+	
+	if (!isLogin.value) {
+		goTo('/pages/user/login')
+	}
 	
 	let paramStr = ''
 	params.forEach(param => {
@@ -39,11 +35,6 @@ export const request = async (
 			paramStr += `${key}=${param[key]}&`
 		}
 	})
-
-	// if (url !== '/auth/local' && !isLogin.value) {
-	// 	goTo('/pages/user/login')
-	// 	return
-	// }
 	
 	return new Promise<ResponseData>((resolve, reject) => {
 		uni.request({

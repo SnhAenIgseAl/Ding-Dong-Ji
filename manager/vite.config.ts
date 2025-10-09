@@ -59,6 +59,13 @@ export default defineConfig({
     },
     server: {
         host: '127.0.0.1',
-        port: 8848
+        port: 8848,
+        proxy: {
+            '/map-api': {
+                target: 'https://api.map.baidu.com',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/map-api/, '')
+            }
+        }
     }
 })

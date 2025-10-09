@@ -47,4 +47,5 @@ declare interface Store {
     updatedAt:     ISODateString;
     publishedAt:   ISODateString;
     is_operation:  boolean;
+    user?:         User;
 }

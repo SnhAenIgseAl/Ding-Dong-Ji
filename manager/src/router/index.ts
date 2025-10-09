@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
 	},
 	{
 		path: '/order/:id',
-		name: 'order-detail',
+		name: 'orderDetail',
 		component: () => import('@/views/order/detail.vue')
 	},
 	{
@@ -44,6 +44,21 @@ const routes: RouteRecordRaw[] = [
 		path: '/comment',
 		name: 'comment',
 		component: () => import('@/views/comment/comment.vue')
+	},
+	{
+		path: '/store',
+		name: 'store',
+		component: () => import('@/views/store/store.vue')
+	},
+	{
+		path: '/store/register',
+		name: 'storeRegister',
+		component: () => import('@/views/store/register.vue')
+	},
+	{
+		path: '/store/bind',
+		name: 'storeBind',
+		component: () => import('@/views/store/bind.vue')
 	},
 	{
 		path: '/user',
@@ -75,14 +90,29 @@ router.beforeEach(async (to, from, next) => {
 	const errPage = /^\/error\/\d{3}$/
 	console.log(userStore.userState)
 
+	const isLogin = userStore.isLogin
+	const isAdmin = userStore.userState?.is_admin
+	const storeInfo = userStore.userState?.store
+
 	if (to.path !== '/login' && !userStore.isLogin) {
 		next({ path: '/login' })
 	}
 
-	if (userStore.isLogin) {
-		if (errPage.test(to.path) || userStore.userState.store !== null) {
-			next()
+	if (to.path === '/store/bind' && isLogin && isAdmin) {
+		next()
+	}
+
+	if (isLogin) {
+		if (isAdmin) {
+			if (storeInfo !== null) {
+				next()
+			} else {
+				next({ path: '/store/bind' })
+			}
 		} else {
+			if (errPage.test(to.path)) {
+				next()
+			}
 			next({ path: '/error/403' })
 		}
 	}

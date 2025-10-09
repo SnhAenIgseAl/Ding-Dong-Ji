@@ -769,9 +769,11 @@ export interface ApiStoreStore extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    latitude: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::store.store'> &
       Schema.Attribute.Private;
+    longitude: Schema.Attribute.Decimal;
     menus: Schema.Attribute.Relation<'manyToMany', 'api::menu.menu'>;
     order_lists: Schema.Attribute.Relation<
       'oneToMany',
@@ -785,7 +787,6 @@ export interface ApiStoreStore extends Struct.CollectionTypeSchema {
         minLength: 1;
       }>;
     store_closing: Schema.Attribute.Time & Schema.Attribute.Required;
-    store_id: Schema.Attribute.UID<'store_name'> & Schema.Attribute.Required;
     store_name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -1311,6 +1312,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    is_admin: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
