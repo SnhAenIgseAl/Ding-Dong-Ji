@@ -9,7 +9,6 @@ export default (config, { strapi }: { strapi: Core.Strapi }) => {
 		const user = ctx.state.user;
 		const role = ctx.state.user.role;
 		const entryId = ctx.params.id ? ctx.params.id : undefined;
-		let entry: any = {};
 		
 		/**
 		 * 分店管理员
@@ -27,21 +26,23 @@ export default (config, { strapi }: { strapi: Core.Strapi }) => {
 					...ctx.query,
 					filters: {
 						store: {
-							id: store.id,
+							documentId: store.documentId,
 						},
 						...ctx.query.filters
 					},
 				}
+				console.log(ctx.query.filters);
+				
 				return next()
 			}
 
 			if (entryId) {
-				entry = await strapi.documents('api::order-list.order-list').findOne({
+				let entry = await strapi.documents('api::order-list.order-list').findOne({
 					documentId: entryId,
 					populate: "*"
 				});
 				
-				if (store.id !== entry.store.id) {
+				if (store.documentId !== entry.store.documentId) {
 					return ctx.unauthorized("非本店管理员，无权操作");
 				} else {
 					return next();
@@ -67,11 +68,10 @@ export default (config, { strapi }: { strapi: Core.Strapi }) => {
 			}
 
 			if (entryId) {
-				entry = await strapi.documents('api::order-list.order-list').findOne({
+				let entry = await strapi.documents('api::order-list.order-list').findOne({
 					documentId: entryId,
 					populate: "*"
 				});
-				console.log(entry);
 				if (user.id !== entry.user.id) {
 					return ctx.unauthorized("非本用户，无权操作");
 				} else {

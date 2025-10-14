@@ -22,6 +22,16 @@ export default factories.createCoreController('api::order-list.order-list', ({ s
             discount: OrderList['discount'],
         } = ctx.request.body.data
 
+        // 检查菜单数量是否为整数
+        for (let i in order_list) {
+            if (order_list[i].menu_number % 1 !== 0 || order_list[i].menu_number <= 0) {
+                return {
+                    code: -1,
+                    message: '菜单数量必须为正整数'
+                }
+            }
+        }
+
         const menuList = await strapi.documents('api::menu.menu').findMany()
         let totalPrice = 0
 

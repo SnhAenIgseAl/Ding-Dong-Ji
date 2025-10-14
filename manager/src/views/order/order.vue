@@ -153,9 +153,9 @@ const initOrderList = async (
         'pagination[page]': page + '',
         'pagination[pageSize]': pageSize + ''
     }, {
-        'filters[createdAt][$gte]': new Date(dateStart.value).toISOString(),
+        'filters[createdAt][$gt]': new Date(dateStart.value).toISOString(),
     }, {
-        'filters[createdAt][$lte]': new Date(dateEnd.value).toISOString()
+        'filters[createdAt][$lt]': new Date(dateEnd.value).toISOString()
     }])
     orderListOrigin.value = orderRes.data
     orderPage.total = orderRes.meta.pagination.total
@@ -190,14 +190,14 @@ const dateStart = ref(date.value.setHours(0, 0, 0, 0))
 const dateEnd = ref(date.value.setHours(23, 59, 59, 999))
 
 const calendarClick: CalendarProps['onCellClick'] = (option) => {
-    console.log(option);
+    // console.log(option);
     date.value = option.cell.date
     dateStart.value = option.cell.date.setHours(0, 0, 0, 0)
     dateEnd.value = option.cell.date.setHours(23, 59, 59, 999)
-    // console.log(
-    //     new Date(dateStart.value).toISOString(),
-    //     new Date(dateEnd.value).toISOString()
-    // );
+    console.log(
+        new Date(dateStart.value).toISOString(),
+        new Date(dateEnd.value).toISOString()
+    );
     
     initOrderList(orderPage.defaultCurrent, orderPage.defaultPageSize)
 }
@@ -210,6 +210,8 @@ const calendarClick: CalendarProps['onCellClick'] = (option) => {
  */
 const handleChange: TableProps['onChange'] = (pagination) => {
     const { current, pageSize } = pagination.pagination
+    orderPage.defaultCurrent = current
+    orderPage.defaultPageSize = pageSize
     initOrderList(current, pageSize)
 }
 
