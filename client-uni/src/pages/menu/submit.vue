@@ -50,7 +50,7 @@
                 v-for="item in orderList"
                 :key="item.documentId"
                 :title="`${item.menu_name} * ${item.menu_number}`"
-                :img="`${BASE_SERVER_URL}${item.menu_img.url}`"
+                :img="item.menu_img.url"
             >
                 <template #content>
                     <span 

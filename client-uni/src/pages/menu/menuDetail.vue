@@ -7,7 +7,7 @@
             height="360rpx"
             radius="16rpx"
             mode="aspectFill"
-            :src="BASE_SERVER_URL + detail.menu_img.url" 
+            :src="detail.menu_img.url" 
         />
         <view 
             v-if="detail.menu_flavors"

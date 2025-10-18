@@ -40,7 +40,7 @@
                             <!-- 分店有此菜品 -->
                             <view v-if="menu.stores.some((store) => store.documentId === storeInfo?.documentId!)">
                                 <wd-img 
-                                    :src="BASE_SERVER_URL + menu.menu_img.url" 
+                                    :src="menu.menu_img.url" 
                                     mode="aspectFill" 
                                     width="100%" 
                                     height="240rpx" 
@@ -63,7 +63,7 @@
                             <!-- 分店没有此菜品 -->
                             <view v-else style="opacity: 0.5;">
                                 <wd-img 
-                                    :src="BASE_SERVER_URL + menu.menu_img.url" 
+                                    :src="menu.menu_img.url" 
                                     mode="aspectFill" 
                                     width="100%" 
                                     height="240rpx" 
@@ -103,7 +103,7 @@
                 >
                     <ShowLayout 
                         :title="`${item.menu_name} * ${item.menu_number}`"
-                        :img="BASE_SERVER_URL + item.menu_img.url"
+                        :img="item.menu_img.url"
                     >
                         <template #suffix>
                             <wd-button 
