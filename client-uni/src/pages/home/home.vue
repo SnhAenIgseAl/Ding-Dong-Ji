@@ -2,6 +2,12 @@
     <Navbar title="首页"/>
     <view class="page">
 
+        <view class="title">餐厅</view>
+        <view style="margin: -32rpx;">
+            <ChooseStore />
+        </view>
+        
+
         <view class="title">点餐</view>
         <view class="ctx-1">
             <wd-row>
@@ -69,6 +75,7 @@ import { getHomeData, BASE_SERVER_URL } from '@/api/index'
 import { useShoppingStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { goTo } from '@/utils/common'
+import ChooseStore from '@/components/ChooseStore.vue'
 
 const {
 	orderMode
@@ -119,7 +126,7 @@ const arrive = () => {
     width: 100%;
     height: 240rpx;
     border-radius: 16rpx;
-    border: 1rpx solid #999;
+    border: 1rpx solid #ccc;
 }
 
 .text {

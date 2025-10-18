@@ -52,9 +52,9 @@ const createFakeOrder = async () => {
     }
     let num = 0
 
-    const doFakeOrder = setInterval(() => {
+    const doFakeOrder = setInterval(async () => {
         const randomIndex = Math.floor(Math.random() * orderList.value.length)
-        submitFakeOrder({
+        await submitFakeOrder({
             store: orderList.value[randomIndex].store.documentId,
             order_mode: randomOrderMode(),
             userToken: userToken.value,

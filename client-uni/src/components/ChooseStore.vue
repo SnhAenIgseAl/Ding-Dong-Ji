@@ -35,29 +35,22 @@
                     :value="storeIndex"
                     :disabled="!storeItem.is_operation"
                 >
-                    <ShowLayout>
-                        <template #title>
-                            {{ storeItem.store_name }}
-                        </template>
-                        <template #content>
-                            {{ storeItem.store_address }} | 
-                            {{ getDistance(latitude, longitude, storeItem.latitude, storeItem.longitude) }}m
-                        </template>
-                        <template #suffix>
-                            <span v-if="storeItem.is_operation">营业中</span>
-                            <span v-else>已打烊</span>
-                        </template>
-                    </ShowLayout>
+                    <span v-if="storeItem.is_operation">营业中</span>
+                    <span v-else>已打烊</span> | 
+                    {{ storeItem.store_name }} | 
+                    {{ getDistance(latitude, longitude, storeItem.latitude, storeItem.longitude) }}m
                 </wd-radio>
             </wd-radio-group>
+
+            <wd-button 
+                type="primary" 
+                @click="confirm"
+                block
+            >
+                确定
+            </wd-button>
         </view>
-        <wd-button 
-            type="primary" 
-            @click="confirm"
-            block
-        >
-            确定
-        </wd-button>
+        
     </wd-action-sheet>
 </template>
 
@@ -128,5 +121,11 @@ const confirm = () => {
     height: auto;
     max-height: 960rpx;
     overflow-y: scroll;
+}
+
+.store-item {
+    max-width: 80%;
+    /* padding: 32rpx; */
+    /* box-sizing: border-box; */
 }
 </style>
