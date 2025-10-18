@@ -61,7 +61,7 @@
                 height="360rpx"
                 radius="16rpx"
                 mode="aspectFill"
-                :src="BASE_SERVER_URL + imgItem.url"
+                :src="imgItem.url"
             />
         </view>
 
@@ -72,7 +72,7 @@
 import Navbar from '@/components/Navbar.vue'
 import { ref } from 'vue'
 import { getHomeData, BASE_SERVER_URL } from '@/api/index'
-import { useShoppingStore } from '@/stores/index'
+import { useUserStore, useShoppingStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { goTo } from '@/utils/common'
 import ChooseStore from '@/components/ChooseStore.vue'
@@ -80,6 +80,14 @@ import ChooseStore from '@/components/ChooseStore.vue'
 const {
 	orderMode
 } = storeToRefs(useShoppingStore())
+
+const {
+    isLogin
+} = useUserStore()
+
+if (!isLogin) {
+    goTo('/pages/login/login')
+}
 
 const imgList = ref<Image[]>([])
 const imgListLoad = ref<boolean>(true)

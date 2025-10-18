@@ -25,10 +25,6 @@ export const request = async (
 	const { isLogin, userToken } = storeToRefs(await getUserStore())
 	const [...params] = config.params ?? []
 	
-	if (!isLogin.value) {
-		goTo('/pages/user/login')
-	}
-	
 	let paramStr = ''
 	params.forEach(param => {
 		for (let key in param) {

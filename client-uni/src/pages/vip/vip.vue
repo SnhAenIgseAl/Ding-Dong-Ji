@@ -8,7 +8,7 @@
                     v-for="item in vipMenuList"
                     :key="item.documentId"
                     mode="card"
-                    :img="BASE_SERVER_URL + item.menu_img.url"
+                    :img="item.menu_img.url"
                     :title="item.menu_name"
                     :content="`${item.menu_price}元`"
                 />
@@ -19,7 +19,7 @@
         <ShowLayout 
             v-for="item in vipMenuList"
             :key="item.documentId"
-            :img="BASE_SERVER_URL + item.menu_img.url"
+            :img="item.menu_img.url"
             :title="item.menu_name"
             :content="`${item.menu_price}元`"
         />

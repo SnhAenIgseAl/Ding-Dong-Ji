@@ -66,7 +66,11 @@ const {
     setUserInfoAsync
 } = useUserStore()
 
-setUserInfoAsync()
+if (!isLogin.value) {
+    goTo('/pages/user/login')
+} else {
+    setUserInfoAsync()
+}
 
 const userAvatar = computed(() => {
     if (isLogin.value) {
