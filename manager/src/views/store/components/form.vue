@@ -11,9 +11,6 @@
         <t-form-item label="分店名称" name="store_name">
             <t-input v-model="formData.store_name"></t-input>
         </t-form-item>
-        <!-- <t-form-item label="分店地址" name="store_address">
-            <t-input v-model="formData.store_address" @change="addressChange"></t-input>
-        </t-form-item> -->
         <t-form-item label="分店地址" name="store_address">
             <t-row :gutter="[20, 20]">
                 <t-col :span="4">
@@ -44,7 +41,7 @@
                         @change="addressChange"
                     />
                 </t-col>
-                <t-col v-if="addressList.length" :span="12" offset="12px">
+                <t-col v-if="addressList.length" :span="12">
                     <t-radio-group 
                         v-model="chooseAddress" 
                         @change="chooseAddressChange"
