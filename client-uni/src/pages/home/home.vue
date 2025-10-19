@@ -81,14 +81,6 @@ const {
 	orderMode
 } = storeToRefs(useShoppingStore())
 
-const {
-    isLogin
-} = useUserStore()
-
-if (!isLogin) {
-    goTo('/pages/user/login')
-}
-
 const imgList = ref<Image[]>([])
 const imgListLoad = ref<boolean>(true)
 
@@ -98,24 +90,6 @@ getHomeData([
     imgList.value = res.data.goods_img
     imgListLoad.value = false
 })
-
-const iconList = [
-    {
-        name: "add-circle"
-    },
-    {
-        name: "add-circle"
-    },
-    {
-        name: "add-circle"
-    },
-    {
-        name: "add-circle"
-    },
-    {
-        name: "add-circle"
-    }
-]
 
 const outside = () => {
     orderMode.value = 'outside'
