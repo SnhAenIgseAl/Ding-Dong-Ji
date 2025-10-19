@@ -1,6 +1,6 @@
 {
-    "name" : "",
-    "appid" : "",
+    "name" : "叮咚记外卖",
+    "appid" : "__UNI__6828960",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -66,10 +66,7 @@
                 "desc" : "获取当前位置"
             }
         },
-        "requiredPrivateInfos": [
-            "getLocation",
-            "chooseLocation"
-        ]
+        "requiredPrivateInfos" : [ "getLocation", "chooseLocation" ]
     },
     "mp-alipay" : {
         "usingComponents" : true

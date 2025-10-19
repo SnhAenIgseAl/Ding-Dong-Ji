@@ -9,6 +9,7 @@
                     :title="item.title" 
                     :to="item.to"
                     is-link 
+                    @click="item.onClick"
                 />
             </wd-cell-group>
         </view>
@@ -19,7 +20,8 @@
 
 interface CellGroup {
     title: string,
-    to: string
+    to?: string,
+    onClick?: () => void
 }
 
 const {

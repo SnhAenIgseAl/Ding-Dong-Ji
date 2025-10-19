@@ -63,7 +63,8 @@ const {
     defaultAvatar
 } = storeToRefs(useUserStore())
 const {
-    setUserInfoAsync
+    setUserInfoAsync,
+    logout
 } = useUserStore()
 
 if (!isLogin.value) {
@@ -103,6 +104,12 @@ const userGroup = [
     {
         title: '注册页',
         to: '/pages/user/register'
+    },
+    {
+        title: '退出登录',
+        onClick: () => {
+            logout()
+        }
     }
 ]
 

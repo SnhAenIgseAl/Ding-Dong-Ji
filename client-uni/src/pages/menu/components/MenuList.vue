@@ -250,6 +250,8 @@ const goToSubmit = () => {
             title: '请选择菜品',
             icon: 'none'
         })
+    } else if (!userStore.isLogin) {
+        goTo('/pages/user/login')
     } else {
         // orderList.value = cartList.value
         console.log(orderList.value)

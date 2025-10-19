@@ -58,7 +58,7 @@
     "miniprogram-api-typings": "^4.1.0",
     "pinia": "^2.0.36",
     "pinia-plugin-persistedstate": "^2.3.0",
-    "unplugin-auto-import": "^20.0.0",
+    "unplugin-auto-import": "^0.17.8",
     "vue": "^3.5.1",
     "wot-design-uni": "^1.11.1"
   },

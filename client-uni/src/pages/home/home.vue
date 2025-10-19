@@ -86,7 +86,7 @@ const {
 } = useUserStore()
 
 if (!isLogin) {
-    goTo('/pages/login/login')
+    goTo('/pages/user/login')
 }
 
 const imgList = ref<Image[]>([])
