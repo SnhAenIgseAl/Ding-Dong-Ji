@@ -25,7 +25,7 @@
             <template #menu_img="{ row }">
                 <t-image
                     v-if="row.menu_img"
-                    :src="BASE_URL + row.menu_img.url"
+                    :src="row.menu_img.url"
                     fit="cover"
                     :style="{ width: '100px', height: '100px' }"
                 />
@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { getMenuList, changeMenuOwn, BASE_URL } from '@/api'
+import { getMenuList, changeMenuOwn } from '@/api'
 import { useUserStore } from '@/stores';
 import { MessagePlugin, TableProps } from 'tdesign-vue-next'
 

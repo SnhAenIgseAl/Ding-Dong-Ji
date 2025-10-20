@@ -17,32 +17,33 @@
 </template>
 
 <script setup lang="ts">
-import { submitFakeOrder, submitFakeComment, getOrderLists, getCommentList } from '@/api'
-import { MessagePlugin } from 'tdesign-vue-next';
+import { submitFakeOrder, submitFakeComment, getMenuList, getCommentList } from '@/api'
+import { MessagePlugin } from 'tdesign-vue-next'
+import { useUserStore } from '@/stores'
+
+const userStore = useUserStore()
 
 const userId = ref<string>()
 const userToken = ref<string>()
 
-const orderList = ref<Order[]>()
-const initOrderList = async () => {
-    const orderRes = await getOrderLists([{
-        'sort': 'createdAt:desc',
-        'populate': 'store',
-        'pagination[page]': '1',
-        'pagination[pageSize]': '50',
-    }])
-
-    orderList.value = orderRes.data
+const menuList = ref<Menu[]>()
+const initMenuList = async () => {
+    const menuRes = await getMenuList([
+        { 'populate': 'menu_flavors' }
+    ])
+    menuList.value = menuRes.data
 }
 
 
 const createFakeOrder = async () => {
-    if (!userId.value || !userToken.value) {
+    if (!userToken.value) {
         MessagePlugin.error('请输入用户id和token')
         return
     }
-    await initOrderList()
+    await initMenuList()
+
     const randomNum = Math.floor(Math.random() * 10) + 20
+
     const randomOrderMode = () => {
         if (Math.floor(Math.random() * 10) > 5) { 
             return 'dine_in'
@@ -50,15 +51,37 @@ const createFakeOrder = async () => {
             return 'takeout'
         }
     }
+
+    const randomMenu = (index: number) => {
+        let res = {}
+
+        function getRandomArr() {
+            let arr = []
+            for (let i = 0; i < index; i++) {
+                arr.push(i)
+            }
+            return arr
+        }
+
+        for (let i in getRandomArr()) {
+            const randomMenuName = menuList.value[i].menu_name
+            res[randomMenuName] = menuList.value[i]
+            res[randomMenuName].menu_number = Math.floor(Math.random() * 5) + 1
+        }
+
+        return res
+    }
+
     let num = 0
 
     const doFakeOrder = setInterval(async () => {
-        const randomIndex = Math.floor(Math.random() * orderList.value.length)
+        const randomIndex = Math.floor(Math.random() * menuList.value.length) + 1
+
         await submitFakeOrder({
-            store: orderList.value[randomIndex].store.documentId,
+            store: userStore.userState.store.documentId,
             order_mode: randomOrderMode(),
             userToken: userToken.value,
-            order_list: orderList.value[randomIndex].order_list,
+            order_list: randomMenu(randomIndex)
         }).then(res => {
             if (res.code === 0) {
                 MessagePlugin.success(`第${num}条数据发布成功`)
@@ -95,7 +118,7 @@ const createFakeComment = async () => {
     const randomNum = Math.floor(Math.random() * 5) + 5
     let num = 0
 
-    const doFakeComment = setInterval(() => {
+    const doFakeComment = setInterval(async () => {
         let text = `测试评论${num + 1}`
         const randomIndex = Math.floor(Math.random() * commentList.value.length)
         const randomRoot = () => {
@@ -106,7 +129,7 @@ const createFakeComment = async () => {
             }
         } 
 
-        submitFakeComment({
+        await submitFakeComment({
             root_comment: randomRoot(),
             comment_text: text,
             userToken: userToken.value,

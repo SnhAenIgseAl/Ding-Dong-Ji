@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { UploadProps, MessagePlugin, RequestMethodResponse } from 'tdesign-vue-next'
-import { uploadAvatar, updateUser, forgetPassword, BASE_URL } from '@/api'
+import { uploadAvatar, updateUser, forgetPassword, SERVER_URL } from '@/api'
 import { useUserStore } from '@/stores';
 
 const userStore = useUserStore()
@@ -62,7 +62,7 @@ onMounted(async () => {
 const uploadImg = async (file) => {
     return new Promise<RequestMethodResponse>((resolve, reject) => {
         uploadAvatar(file.raw).then(res => {
-            imgUrl.value = BASE_URL + res[0].url
+            imgUrl.value = res[0].url
             avatarUrl.value = imgUrl.value
             canUpdate.value = true
         })

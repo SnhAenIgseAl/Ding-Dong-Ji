@@ -4,7 +4,6 @@ import { request } from "@/utils/request"
 export const submitOrder = ({
     store,
     order_mode,
-    user,
     order_list,
     order_status,
     discount,
@@ -12,7 +11,6 @@ export const submitOrder = ({
 }: {
     store: Store['documentId'],
     order_mode: OrderMode,
-    user: User['documentId'],
     order_list: OrderList,
     order_status: OrderStatus,
     discount?: Discount['documentId'],
@@ -30,7 +28,6 @@ export const submitOrder = ({
                     order_id: 0,
                     store,
                     order_mode,
-                    user,
                     order_list,
                     order_price: 0,
                     order_status,

@@ -1,7 +1,7 @@
 interface OrderList {
     id: number,
     documentId: string,
-    order_mode: 'deline' | 'takeout',
+    order_mode: 'dine_in' | 'outside' | 'takeout',
     order_list: {
         [key: string]: Menu,
     },
