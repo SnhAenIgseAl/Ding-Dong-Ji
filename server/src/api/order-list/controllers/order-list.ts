@@ -4,7 +4,6 @@
 
 import { factories } from '@strapi/strapi'
 import { isStoreOpening } from '../../../utils/common';
-import type JSONValue from '@strapi/types'
 
 let ORDER_ID: OrderID = {}
 
@@ -95,7 +94,7 @@ export default factories.createCoreController('api::order-list.order-list', ({ s
                 order_status: 'production',
                 order_id: orderId,
                 store: store,
-                order_list: order_list as typeof JSONValue,
+                order_list: order_list as any,
                 order_price: parseFloat(totalPrice.toFixed(2)),
                 discount: discount || null
             },
