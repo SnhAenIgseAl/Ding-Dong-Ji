@@ -4,7 +4,7 @@
 
 import { factories } from '@strapi/strapi'
 import { isStoreOpening } from '../../../utils/common';
-// import { menuModel, storeModel } from '../../../utils/model';
+import type JSONValue from '@strapi/types'
 
 let ORDER_ID: OrderID = {}
 
@@ -15,11 +15,13 @@ export default factories.createCoreController('api::order-list.order-list', ({ s
             order_list,
             store,
             discount,
+            order_mode,
             ...data
         }: {
             order_list: OrderList['order_list'],
             store: OrderList['store'],
             discount: OrderList['discount'],
+            order_mode: OrderList['order_mode'],
         } = ctx.request.body.data
 
         // 检查菜单数量是否为整数
@@ -85,20 +87,25 @@ export default factories.createCoreController('api::order-list.order-list', ({ s
         ORDER_ID[store] = ORDER_ID[store] || 0
         const orderId = storeInfo.id + String(++ORDER_ID[store]).padStart(3, '0')
 
-        ctx.request.body.data = {
-            ...data,
-            order_id: orderId,
-            store: store,
-            order_list: order_list,
-            order_price: parseFloat(totalPrice.toFixed(2)),
-            discount: discount || null
-        }
-        const createData = await super.create(ctx)
+        const createData = await strapi.documents('api::order-list.order-list').create({
+            data: {
+                ...data,
+                user: ctx.state.user.documentId,
+                order_mode: order_mode,
+                order_status: 'production',
+                order_id: orderId,
+                store: store,
+                order_list: order_list as typeof JSONValue,
+                order_price: parseFloat(totalPrice.toFixed(2)),
+                discount: discount || null
+            },
+            status: 'published'
+        })
 
         return {
             code: 0,
             message: '订单创建成功',
-            data: createData.data
+            data: createData
         }
     },
 
