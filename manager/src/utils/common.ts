@@ -46,3 +46,14 @@ export const groupBy = (list: any[], key: string | Function ) => {
     })
     return res
 }
+
+/**
+ * 睡眠
+ */
+export const sleep = (time: number) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(true)
+        }, time)
+    })
+}

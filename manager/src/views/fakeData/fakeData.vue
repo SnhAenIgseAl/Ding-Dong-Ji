@@ -3,7 +3,7 @@
         <t-card title="生成订单数据" header-bordered>
             <t-input v-model="userToken" placeholder="用户token"></t-input>
             <template #footer>
-                <t-button primary @click="createFakeOrder">生成订单（堂食、外带随机 | 10~30条）</t-button>
+                <t-button primary @click="createFakeOrder">生成订单（堂食、外带随机 | 20~30条）</t-button>
             </template>
         </t-card>
 
@@ -20,10 +20,10 @@
 import { submitFakeOrder, submitFakeComment, getMenuList, getCommentList } from '@/api'
 import { MessagePlugin } from 'tdesign-vue-next'
 import { useUserStore } from '@/stores'
+import { sleep } from '@/utils/common'
 
 const userStore = useUserStore()
 
-const userId = ref<string>()
 const userToken = ref<string>()
 
 const menuList = ref<Menu[]>()
@@ -42,7 +42,6 @@ const createFakeOrder = async () => {
     }
     await initMenuList()
 
-    const randomNum = Math.floor(Math.random() * 10) + 20
 
     const randomOrderMode = () => {
         if (Math.floor(Math.random() * 10) > 5) { 
@@ -72,9 +71,8 @@ const createFakeOrder = async () => {
         return res
     }
 
-    let num = 0
-
-    const doFakeOrder = setInterval(async () => {
+    const randomNum = Math.floor(Math.random() * 10) + 20
+    for (let num = 1; num <= randomNum; num++) {
         const randomIndex = Math.floor(Math.random() * menuList.value.length) + 1
 
         await submitFakeOrder({
@@ -90,12 +88,8 @@ const createFakeOrder = async () => {
             }
         })
 
-        num++
-
-        if (num === randomNum) {
-            clearInterval(doFakeOrder)
-        }
-    }, 100)
+        await sleep(200)
+    }
 }
 
 const commentList = ref<Comment[]>()
@@ -110,16 +104,15 @@ const initCommentList = async () => {
 }
 
 const createFakeComment = async () => {
-    if (!userId.value || !userToken.value) {
+    if (!userToken.value) {
         MessagePlugin.error('请输入用户id和token')
         return
     }
     await initCommentList()
-    const randomNum = Math.floor(Math.random() * 5) + 5
-    let num = 0
 
-    const doFakeComment = setInterval(async () => {
-        let text = `测试评论${num + 1}`
+    const randomNum = Math.floor(Math.random() * 5) + 5
+    for (let num = 1; num <= randomNum; num++) {
+        const text = `测试评论${num + 1}`
         const randomIndex = Math.floor(Math.random() * commentList.value.length)
         const randomRoot = () => {
             if (Math.floor(Math.random() * 10) > 3) {
@@ -140,13 +133,8 @@ const createFakeComment = async () => {
                 MessagePlugin.error(`第${num}条数据发布失败`)
             }
         })
-        
-        num++
-
-        if (num === randomNum) {
-            clearInterval(doFakeComment)
-        }
-    }, 100)
+        await sleep(200)
+    }
 }
 </script>
 
