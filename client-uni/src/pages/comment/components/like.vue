@@ -5,7 +5,7 @@
         icon="star" 
         @click="like"
     >
-        {{ likeCount }}
+        <span style="margin-left: 8rpx;">{{ likeCount }}</span>
     </wd-button>
     <wd-button 
         v-else

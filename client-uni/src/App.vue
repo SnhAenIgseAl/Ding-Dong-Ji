@@ -64,7 +64,10 @@
 
 <style lang="scss">
 
-$-color-theme: #ff9900;
+:root,
+page {
+	--wot-color-theme: #ff9900;
+}
 
 .wd-divider {
 	padding: unset !important;

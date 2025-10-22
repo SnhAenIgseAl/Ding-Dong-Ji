@@ -86,8 +86,12 @@
         </scroll-view>
 
         <view class="order">
-            <wd-button type="icon" icon="cart" @click="showCartList = !showCartList"></wd-button>
-            {{ totalPrice.toFixed(1) }}
+            <view class="order-price">
+                <wd-badge v-model="Object.keys(orderList).length">
+                    <wd-button type="icon" icon="cart" @click="showCartList = !showCartList"></wd-button>
+                </wd-badge>
+                <view>{{ totalPrice.toFixed(1) }}</view>
+            </view>
             <wd-button type="primary" @click="goToSubmit">提交订单</wd-button>
         </view>
 
@@ -115,14 +119,6 @@
                             </wd-button>
                         </template>
                     </ShowLayout>
-                    <!-- {{ item.menu_name }} * {{ item.menu_number }}
-                    <wd-button 
-                        v-if="item.menu_flavors.length" 
-                        size="small"
-                        @click="goTo(`/pages/menu/menuDetail?menuId=${item.documentId}`)"
-                    >
-                        定制
-                    </wd-button> -->
                 </view>
                 <view 
                     v-else 
@@ -293,6 +289,13 @@ const goToSubmit = () => {
     box-shadow: 0px 0px 10px #999;
     background-color: #fff;
     box-sizing: border-box;
+}
+
+.order-price {
+    width: 170rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .order-list {

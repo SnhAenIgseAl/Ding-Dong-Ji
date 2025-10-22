@@ -2,8 +2,8 @@
     <wd-button 
         type="icon" 
         icon="delete" 
-        @click="del">
-    </wd-button>
+        @click="del"
+    />
     <wd-toast />
 </template>
 

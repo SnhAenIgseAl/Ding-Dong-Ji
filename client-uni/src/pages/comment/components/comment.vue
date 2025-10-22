@@ -36,6 +36,11 @@
                     buttonText="回复" 
                     @refresh-sub-comments="openSubComments(comment.documentId)"
                 />
+                <Delete 
+                    v-if="comment.user.documentId === userStore.userState?.documentId" 
+                    :commentId="comment.documentId" 
+                    @delete-comments="isDelete = true"
+                />
                 <view 
                     v-if="comment.sub_comments.length"
                     class="comment-content__sub-comments"
@@ -53,8 +58,8 @@
                         @click="closeSubComments"
                     />
 
-                    <span>
-                        <span
+                    <view style="display: flex; height: 32rpx;">
+                        <view
                             v-for="(subComment, index) in comment.sub_comments"
                             :key="index"
                         >
@@ -65,14 +70,9 @@
                                 mode="aspectFill" 
                                 round
                             />
-                        </span>
-                    </span>
+                        </view>
+                    </view>
                 </view>
-                <Delete 
-                    v-if="comment.user.documentId === userStore.userState?.documentId" 
-                    :commentId="comment.documentId" 
-                    @delete-comments="isDelete = true"
-                />
             </view>
         </view>
     </view>
@@ -93,7 +93,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import CommentComponent from './comment.vue'
-import { getSubComments, BASE_SERVER_URL } from '@/api/index'
+import { getSubComments } from '@/api/index'
 import { useUserStore } from '@/stores';
 import Like from './like.vue';
 import Reply from './reply.vue';
@@ -157,6 +157,10 @@ const closeSubComments = () => {
     display: flex;
     flex-flow: column nowrap;
     gap: 24rpx;
+    /* padding: 32rpx;
+    border: 1px solid #ccc;
+    border-radius: 16rpx;
+    box-sizing: border-box; */
 }
 
 .comment-content__sub-comments {
@@ -176,6 +180,10 @@ const closeSubComments = () => {
     display: flex;
     align-items: center;
     margin-left: -24rpx;
+    padding: 0rpx 16rpx;
+    border: 1px solid #ccc;
+    border-radius: 10000rpx;
+    box-sizing: border-box;
 }
 
 .sub-comments {
