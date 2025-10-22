@@ -29,6 +29,24 @@
         "images"
       ]
     },
+    "outside_icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "dine_icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
     "vip_page_bg": {
       "type": "media",
       "multiple": false,
