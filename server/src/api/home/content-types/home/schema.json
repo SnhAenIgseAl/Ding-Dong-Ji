@@ -20,6 +20,15 @@
         "files"
       ]
     },
+    "swiper_img": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    },
     "vip_page_bg": {
       "type": "media",
       "multiple": false,

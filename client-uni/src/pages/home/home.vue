@@ -1,5 +1,12 @@
 <template>
     <Navbar title="首页"/>
+    <view>
+        <wd-swiper 
+            :list="swiperList" 
+            autoplay
+            :indicator="{ type: 'dots-bar' }" 
+        />
+    </view>
     <view class="page">
 
         <view class="title">餐厅</view>
@@ -14,14 +21,16 @@
                 <wd-col :span="12">
                     <view 
                         class="text" 
-                        @click="outside">
+                        @click="outside"
+                    >
                         外送点餐
                     </view>
                 </wd-col>
                 <wd-col :span="12">
                     <view 
                         class="text" 
-                        @click="arrive">
+                        @click="arrive"
+                    >
                         到店取餐
                     </view>
                 </wd-col>
@@ -71,8 +80,8 @@
 <script setup lang="ts">
 import Navbar from '@/components/Navbar.vue'
 import { ref } from 'vue'
-import { getHomeData, BASE_SERVER_URL } from '@/api/index'
-import { useUserStore, useShoppingStore } from '@/stores/index'
+import { getHomeData } from '@/api/index'
+import { useShoppingStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { goTo } from '@/utils/common'
 import ChooseStore from '@/components/ChooseStore.vue'
@@ -82,12 +91,14 @@ const {
 } = storeToRefs(useShoppingStore())
 
 const imgList = ref<Image[]>([])
+const swiperList = ref<Image[]>([])
 const imgListLoad = ref<boolean>(true)
 
 getHomeData([
     { 'populate': '*' }
 ]).then(res => {
     imgList.value = res.data.goods_img
+    swiperList.value = res.data.swiper_img
     imgListLoad.value = false
 })
 

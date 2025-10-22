@@ -51,7 +51,7 @@ const {
     box-sizing: border-box;
     background-color: #fff;
     overflow: hidden;
-    border: 1px solid #eee;
+    border: 1px solid #ccc;
 }
 </style>
 
