@@ -93,7 +93,7 @@ const handlerGetDiscount = () => {
 
 .button-group {
     position: fixed;
-    bottom: 84px;
+    bottom: calc(env(safe-area-inset-bottom) + 50px);
     display: flex;
     width: 100%;
     height: 136rpx;

@@ -28,9 +28,16 @@
             
             <view class="comment-content__text">{{ comment.comment_text }}</view>
            
-            <view class="comment-action">
-                <Like :comment="comment" />
+            <view 
+                v-if="userStore.isLogin || comment.sub_comments.length"
+                class="comment-action"
+            >
+                <Like 
+                    v-if="userStore.isLogin" 
+                    :comment="comment" 
+                />
                 <Reply 
+                    v-if="userStore.isLogin"
                     :commentId="comment.documentId" 
                     :title="`回复${comment.user.username}`" 
                     buttonText="回复" 
@@ -179,7 +186,7 @@ const closeSubComments = () => {
 .comment-action {
     display: flex;
     align-items: center;
-    margin-left: -24rpx;
+    /* margin-left: -24rpx; */
     padding: 0rpx 16rpx;
     border: 1px solid #ccc;
     border-radius: 10000rpx;
