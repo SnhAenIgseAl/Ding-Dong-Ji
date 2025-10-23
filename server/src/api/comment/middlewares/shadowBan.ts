@@ -17,7 +17,8 @@ export default (config, { strapi }: { strapi: Core.Strapi }) => {
 				filters: {
 					is_shadowban: {
 						$eq: false
-					}
+					},
+					...ctx.query.filters
 				}
 			}
 			return next()
