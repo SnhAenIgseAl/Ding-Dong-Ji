@@ -1,6 +1,5 @@
-import { useUserStore } from "@/stores"
 import { useFetch } from "@/utils/request"
-import { AK } from '@/config/request.config'
+import { AK, API_URL } from '@/config/request.config'
 
 interface StoreInfo {
     store_address: string
@@ -46,12 +45,14 @@ export const getStoreList = () => {
  * 创建分店
  */
 export const createStore = (
-    data: StoreInfo
+    data: StoreInfo,
+    token: string
 ) => {
-    return new Promise<ResponseData>((resolve, reject) => {
-        useFetch('/stores', {
+    return new Promise<ResponseData<Store>>((resolve, reject) => {
+        fetch(`${API_URL}/stores`, {
             method: 'POST',
             headers: {
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -60,7 +61,9 @@ export const createStore = (
                 }
             })
         }).then(res => {
-            resolve(res as ResponseData)
+            return res.json()
+        }).then(res => {
+            resolve(res as ResponseData<Store>)
         })
     })
 }

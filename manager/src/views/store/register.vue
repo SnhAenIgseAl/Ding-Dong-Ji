@@ -15,8 +15,15 @@ import { createStore } from '@/api';
 
 const router = useRouter()
 
+const route = useRoute()
+
 const register = (data) => {
-    createStore(data).then(res => {
+    const token = route.query.token
+    
+    createStore(
+        data,
+        token as string
+    ).then(res => {
         if (res.data) {
             MessagePlugin.success('注册分店成功')
             router.push('/total')
