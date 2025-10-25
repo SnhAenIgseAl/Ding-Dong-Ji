@@ -118,9 +118,11 @@ const confirm = () => {
 }
 
 .store-list {
+    padding: 32rpx;
     height: auto;
     max-height: 960rpx;
     overflow-y: scroll;
+    box-sizing: border-box;
 }
 
 .store-item {

@@ -102,13 +102,14 @@
             </view>
             
             <template #footer>
-                <wd-button 
+                <PaymentBtn />
+                <!-- <wd-button 
                     type="primary"  
                     :loading="submitButtonLoading"
                     @click="submit" 
                 >
                     提交订单
-                </wd-button>
+                </wd-button> -->
             </template>
         </wd-card>
     </view>
@@ -123,6 +124,7 @@ import { storeToRefs } from 'pinia';
 import { submitOrder, BASE_SERVER_URL } from '@/api/index'
 import { useToast } from 'wot-design-uni'
 import ShowLayout from '@/components/ShowLayout.vue'
+import PaymentBtn from '@/components/PaymentBtn.vue';
 import { goTo, countPrice, back } from '@/utils/common'
 
 const toast = useToast()
@@ -153,30 +155,30 @@ const totalPrice = computed(() => {
 const submitButtonLoading = ref<boolean>(false)
 const submit = async () => {
     submitButtonLoading.value = true
-    submitOrder({
-        store: storeInfo.value!.documentId,
-        order_mode: orderMode.value,
-        user: userState.value!.documentId,
-        order_list: orderList.value,
-        order_status: 'production',
-        discount: discountInfo.value?.documentId,
-        address: userAddress.value?.documentId
-    }).then(res => {
-        if (res.code === 0) {
-            toast.success('下单成功')
-            orderList.value = {}
-            discountInfo.value = null
-            oriPrice.value = 0
 
-            setTimeout(() => {
-                uni.redirectTo({
-                    url: `/pages/order/detail?documentId=${res.data.documentId}&mode=${orderMode.value}`,
-                })
-            }, 300)
-        } else {
-            toast.error(res.message!)
-        }
-    })
+    // submitOrder({
+    //     store: storeInfo.value!.documentId,
+    //     order_mode: orderMode.value,
+    //     order_list: orderList.value,
+    //     order_status: 'production',
+    //     discount: discountInfo.value?.documentId,
+    //     address: userAddress.value?.documentId
+    // }).then(res => {
+    //     if (res.code === 0) {
+    //         toast.success('下单成功')
+    //         orderList.value = {}
+    //         discountInfo.value = null
+    //         oriPrice.value = 0
+
+    //         setTimeout(() => {
+    //             uni.redirectTo({
+    //                 url: `/pages/order/detail?documentId=${res.data.documentId}&mode=${orderMode.value}`,
+    //             })
+    //         }, 300)
+    //     } else {
+    //         toast.error(res.message!)
+    //     }
+    // })
 
     submitButtonLoading.value = false
 }
