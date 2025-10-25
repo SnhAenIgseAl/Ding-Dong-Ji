@@ -86,6 +86,11 @@ const openPaymentWindow = async () => {
 
 // 提交支付
 const paySubmit = async (type: PayType) => {
+    // #ifdef H5
+    toast.error(`暂不支持H5支付，请在小程序中打开`)
+    return
+    // #endif
+
     if (PAYMENT_CONFIG.REAL) {
 
         let isPaySuccess: boolean = false

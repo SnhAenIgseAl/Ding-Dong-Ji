@@ -2,7 +2,7 @@ export const PAYMENT_CONFIG = {
     /**
      * 是否启动真实支付
      */
-    REAL: false,
+    REAL: true,
     /**
      * 支付宝支付
      */
