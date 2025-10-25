@@ -15,6 +15,10 @@
       "type": "string",
       "required": true
     },
+    "order_no": {
+      "type": "string",
+      "required": true
+    },
     "store": {
       "type": "relation",
       "relation": "manyToOne",
@@ -31,12 +35,6 @@
         "dine_in"
       ]
     },
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "order_lists"
-    },
     "order_list": {
       "type": "json",
       "required": true
@@ -45,6 +43,12 @@
       "type": "decimal",
       "required": true,
       "default": 0
+    },
+    "discount": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::discount.discount",
+      "mappedBy": "order_list"
     },
     "order_status": {
       "type": "enumeration",
@@ -56,16 +60,16 @@
         "canceled"
       ]
     },
-    "discount": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::discount.discount",
-      "mappedBy": "order_list"
-    },
     "address": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::address.address"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "order_lists"
     }
   }
 }

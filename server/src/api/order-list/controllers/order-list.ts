@@ -85,7 +85,7 @@ export default factories.createCoreController('api::order-list.order-list', ({ s
         // 订单编号 = 分店编号 + 当日订单号（三位数，不足补0）
         ORDER_ID[store] = ORDER_ID[store] || 0
         const orderId = storeInfo.id + String(++ORDER_ID[store]).padStart(3, '0')
-
+        const orderNo = new Date().getTime().toString()
         const createData = await strapi.documents('api::order-list.order-list').create({
             data: {
                 ...data,
@@ -93,6 +93,7 @@ export default factories.createCoreController('api::order-list.order-list', ({ s
                 order_mode: order_mode,
                 order_status: 'production',
                 order_id: orderId,
+                order_no: orderNo,
                 store: store,
                 order_list: order_list as any,
                 order_price: parseFloat(totalPrice.toFixed(2)),

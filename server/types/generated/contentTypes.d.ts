@@ -743,6 +743,7 @@ export interface ApiOrderListOrderList extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'dine_in'>;
+    order_no: Schema.Attribute.String & Schema.Attribute.Required;
     order_price: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
